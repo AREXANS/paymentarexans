@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Updated viewport meta tag to disable user zoom -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>GoPay Solo Leveling System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter for general text, Press Start 2P for game UI elements -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Memuat file CSS terpisah -->
+    <link rel="stylesheet" href="css/gopay.css">
+</head>
+<body>
+
+    <!-- Back button -->
+    <button class="back-button" onclick="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/>
+        </svg>
+    </button>
+
+    <!-- System grid background -->
+    <div class="system-grid"></div>
+
+    <!-- Aura background -->
+    <div class="aura-background"></div>
+
+    <div class="main-container solo-leveling-container-glow">
+        <h1 class="system-title">GOPAY PAYMENT <br> SYSTEM ACTIVATED</h1>
+        
+        <p class="description-text">
+            Scan the <span class="font-bold text-green-400">VERIFICATION RUNE</span> to complete your transaction.
+        </p>
+        <p class="description-text mb-4">
+            <span class="warning-text">[!] Warning : Screenshot of payment</span>
+        </p>
+
+        <div class="qris-code-container">
+            <img id="qrisImage" src="https://i.imgur.com/8PDcDLG.jpeg" alt="GoPay Arexans QRIS" class="qris-img" data-download-name="GoPay_QRIS_Arexans.jpeg">
+        </div>
+
+        <p class="description-text mt-2">
+            <span class="font-bold text-green-400">SYSTEM INSTRUCTION:</span> Ensure your GoPay is ready!
+        </p>
+
+        <button class="download-button" onclick="downloadQRIS()">DOWNLOAD QRIS</button>
+
+        <div class="important-note">
+            IMPORTANT NOTE: This is a specific GoPay payment, NOT for QRIS All Payment.
+        </div>
+    </div>
+
+    <!-- Music Player Elements (from index.html) -->
+    <audio id="background-music" src="sololeveling_intro.mp3" loop autoplay muted></audio>
+    <canvas id="linear-audio-visualizer"></canvas>
+    <div id="music-icon-container">
+        <canvas id="circular-audio-visualizer"></canvas>
+        <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="position: relative; z-index: 1;">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zm-2 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+        </svg>
+    </div>
+
+    <!-- Memuat script terpisah -->
+    <script src="js/shared-music.js" defer></script>
+    <script src="js/payment-page.js" defer></script>
+
+</body>
+</html>
