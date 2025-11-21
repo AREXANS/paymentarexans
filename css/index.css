@@ -1,0 +1,695 @@
+/* css/index.css */
+
+/* Reset CSS dan dasar */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: url('https://imagedelivery.net/c2SKP8Bk0ZKw6UDgeeIlbw/9ef5b2ed-3acd-4582-c598-e94838394700/public') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  padding: 50px 20px;
+  position: relative;
+}
+
+/* Kanvas untuk partikel dan salju */
+canvas#particles, canvas#snow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Efek kilauan */
+.shine {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+  transform: rotate(45deg);
+  animation: shine 4s infinite linear;
+  z-index: 0;
+}
+
+@keyframes shine {
+  0% { transform: translate(-100%, -100%) rotate(45deg); }
+  100% { transform: translate(100%, 100%) rotate(45deg); }
+}
+
+/* Pesan selamat datang */
+.welcome-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+h1 {
+  font-size: 3.5em;
+  margin-bottom: 0.3em;
+  animation: fadeInDown 1s ease-in-out;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+}
+
+p {
+  font-size: 1.3em;
+  color: #e2e8f0;
+  animation: fadeInUp 1s ease-in-out;
+  line-height: 1.6;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Gaya QR code (diganti dengan tombol QRIS) */
+.qr-section {
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Gaya tombol QRIS All Payment */
+.qris-button {
+  padding: 18px 30px;
+  background: linear-gradient(135deg, rgba(0, 198, 255, 0.6), rgba(0, 114, 255, 0.6));
+  background-size: 200% 200%;
+  animation: gradientBtn 5s ease infinite, pulseClick 2s infinite ease-in-out;
+  color: white;
+  font-weight: 700;
+  font-size: 1.8em;
+  border-radius: 15px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  transform: perspective(1px) translateZ(0);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qris-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.5) 100%);
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+
+.qris-button:hover::before {
+  transform: translateX(100%) rotate(45deg);
+}
+
+.qris-button:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 114, 255, 0.5);
+}
+
+/* Gaya saat tombol di-klik (active state) */
+.qris-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.5),
+              inset 0 0 10px rgba(0, 198, 255, 0.8);
+  background: linear-gradient(135deg, rgba(0, 114, 255, 0.7), rgba(0, 198, 255, 0.7));
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+}
+
+.qris-button span {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
+
+/* Kontainer yang bisa dilipat (collapsible) */
+.collapsible-container {
+  max-width: 550px;
+  margin: 30px auto;
+  background-color: rgba(30, 41, 59, 0.8);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.collapsible {
+  background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffff);
+  background-size: 200% 200%;
+  animation: gradientBtn 3s ease infinite;
+  color: white;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  font-size: 1.1em;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  color: #cbd5e1;
+  border-radius: 10px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Gaya dasar tombol umum (untuk btn-group dan welcome button) */
+.button-style {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, rgba(0, 114, 255, 0.8), rgba(0, 198, 255, 0.8));
+  background-size: 200% 200%;
+  animation: gradientBtn 4s ease infinite;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transform: perspective(1px) translateZ(0);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-style::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.4) 100%);
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.button-style:hover::before {
+  transform: translateX(100%) rotate(45deg);
+}
+
+.button-style:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+.button-style:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.button-style span {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Gaya khusus untuk tombol PAYMENT di welcome-message */
+#go-to-payment {
+  margin-top: 30px;
+  background: linear-gradient(135deg, rgba(0, 114, 255, 0.8), rgba(0, 198, 255, 0.8));
+  box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+  animation: gradientBtn 4s ease infinite, neonGlowPulse 2s infinite ease-in-out;
+}
+
+#go-to-payment:hover {
+  box-shadow: 0 15px 35px rgba(0, 114, 255, 0.5);
+}
+
+#go-to-payment:active {
+  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.5), inset 0 0 10px rgba(0, 198, 255, 0.8);
+  background: linear-gradient(135deg, rgba(0, 114, 255, 0.9), rgba(0, 198, 255, 0.9));
+}
+
+
+/* Gaya untuk tombol E-Wallet (DANA & GOPAY) */
+.ewallet-button {
+    width: 90%;
+    max-width: 300px;
+    padding: 16px 25px;
+    min-height: 50px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.ewallet-button span {
+  font-size: 1.5em;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Gaya khusus tombol DANA (biru) */
+.dana-button {
+    background: linear-gradient(135deg, rgba(0, 114, 255, 0.8), rgba(0, 198, 255, 0.8));
+    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+    animation: gradientBtn 4s ease infinite;
+}
+
+.dana-button:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 114, 255, 0.5);
+}
+
+.dana-button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 114, 255, 0.5), inset 0 0 10px rgba(0, 198, 255, 0.8);
+    background: linear-gradient(135deg, rgba(0, 114, 255, 0.9), rgba(0, 198, 255, 0.9));
+}
+
+/* Gaya khusus tombol GOPAY (hijau) */
+.gopay-button {
+    background: linear-gradient(135deg, rgba(0, 179, 89, 0.8), rgba(0, 204, 102, 0.8));
+    box-shadow: 0 8px 20px rgba(0, 179, 89, 0.3);
+    animation: gradientBtn 4s ease infinite;
+}
+
+.gopay-button:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 179, 89, 0.5);
+}
+
+.gopay-button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 179, 89, 0.5), inset 0 0 10px rgba(0, 204, 102, 0.8);
+    background: linear-gradient(135deg, rgba(0, 179, 89, 0.9), rgba(0, 204, 102, 0.9));
+}
+
+
+/* Kontainer untuk setiap baris rekening bank */
+.bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 420px;
+  background-color: rgba(60, 70, 80, 0.7);
+  border-radius: 10px;
+  padding: 15px 15px;
+  min-height: 60px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.bank-row p {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #f0f4f8;
+  text-align: left;
+  flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.bank-row .bank-name-text {
+  font-weight: 700;
+  color: #fff;
+  margin-right: 8px;
+}
+
+/* Gaya untuk tombol Salin inline */
+.copy-inline-button {
+  padding: 10px 14px;
+  font-size: 0.9em;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  background-size: 200% 200%;
+  animation: gradientBtn 4s ease infinite;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.copy-inline-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.4) 100%);
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
+.copy-inline-button:hover::before {
+  transform: translateX(100%) rotate(45deg);
+}
+
+.copy-inline-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+}
+
+.copy-inline-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Pesan salin */
+.copy-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 10000;
+  font-weight: 500;
+}
+.copy-message.show {
+  opacity: 1;
+}
+
+/* Kelompok tombol navigasi di bagian bawah */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  gap: 12px;
+}
+
+/* Kontainer baru untuk tombol Channel WhatsApp dan Channel Testimoni */
+.channel-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Gaya khusus untuk tombol Channel WhatsApp dan Channel Testimoni */
+.channel-buttons .button-style {
+    padding: 12px 20px;
+}
+
+.channel-buttons .button-style span {
+    font-size: 1.05em;
+}
+
+/* Animasi keyframe */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradientBtn {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animasi pulseClick untuk QRIS button */
+@keyframes pulseClick {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+  }
+  50% {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 114, 255, 0.5), inset 0 0 10px rgba(0, 198, 255, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+  }
+}
+
+/* Animasi neonGlowPulse baru untuk tombol PAYMENT */
+@keyframes neonGlowPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.7), 0 0 25px rgba(0, 114, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(0, 198, 255, 0.9), 0 0 40px rgba(0, 114, 255, 0.7);
+  }
+}
+
+/* Gaya untuk tombol kembali (ikon SVG melengkung kanan, unik, kreatif, transparan) */
+.back-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+    padding: 0;
+    width: 55px;
+    height: 55px;
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #e0f7fa;
+}
+
+/* Gaya untuk ikon SVG di dalam tombol kembali */
+.back-button svg {
+    fill: currentColor;
+    width: 28px;
+    height: 28px;
+    transform: scaleX(-1);
+    transition: fill 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(0, 191, 255, 0.8);
+}
+.back-button:hover svg {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 5px rgba(0, 191, 255, 1));
+    transform: scale(1.1) scaleX(-1);
+}
+
+.back-button:active {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Wrapper untuk ikon musik saja */
+#music-icon-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+#music-icon-container:hover {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 191, 255, 0.8);
+}
+
+#music-icon {
+    width: 30px;
+    height: 30px;
+    fill: #ffffff;
+    transition: transform 0.1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+/* Gaya untuk visualizer gelombang melingkar (di dalam ikon container) */
+#circular-audio-visualizer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Gaya untuk visualizer gelombang bergaris (terpisah, full width) */
+#linear-audio-visualizer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100px;
+    z-index: 999;
+    pointer-events: none;
+}
+
+
+/* Penyesuaian responsif */
+@media (max-width: 768px) {
+  h1 { font-size: 2.8em; }
+  p { font-size: 1.1em; line-height: 1.5; }
+  .qr-section { gap: 15px; }
+  .qris-button { font-size: 1.6em; padding: 15px 25px; border-radius: 12px; }
+  .collapsible-container {
+    max-width: 500px;
+    padding: 15px;
+  }
+  .btn-group { margin-top: 20px; }
+  .ewallet-button { max-width: 250px; padding: 12px 20px; min-height: 45px; }
+  .ewallet-button span { font-size: 1.3em; }
+  .button-style { font-size: 1em; padding: 12px 20px; }
+  .back-button {
+    width: 48px;
+    height: 48px;
+    top: 15px;
+    right: 15px;
+  }
+  .back-button svg {
+      width: 24px;
+      height: 24px;
+  }
+  .bank-row {
+    max-width: calc(100% - 40px);
+    padding: 12px 10px;
+    min-height: 55px;
+  }
+  .bank-row p {
+    font-size: 0.9em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+  }
+  .copy-inline-button {
+    padding: 8px 10px;
+    font-size: 0.8em;
+  }
+  #music-icon-container {
+    width: 50px;
+    height: 50px;
+    bottom: 15px;
+  }
+  #circular-audio-visualizer {
+    /* Ukuran sudah 100% dari parent, tidak perlu diatur lagi di sini */
+  }
+  #music-icon {
+    width: 25px;
+    height: 25px;
+  }
+  #linear-audio-visualizer {
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2.2em; }
+  p { font-size: 1em; line-height: 1.4; }
+  .qr-section { gap: 10px; }
+  .qris-button { font-size: 1.4em; padding: 12px 20px; border-radius: 10px; }
+  .collapsible, .button-style { font-size: 0.9em; padding: 12px 20px; }
+  .ewallet-button { width: 95%; max-width: 220px; padding: 10px 15px; min-height: 40px; }
+  .ewallet-button span { font-size: 1.2em; }
+  .bank-row {
+    max-width: calc(100% - 20px);
+    padding: 10px 8px;
+    min-height: 50px;
+  }
+  .bank-row p {
+    font-size: 0.8em;
+  }
+  .copy-inline-button {
+    font-size: 0.7em;
+    padding: 5px 7px;
+  }
+  /* Sesuaikan ukuran tombol channel untuk layar sangat kecil */
+  .channel-buttons .button-style {
+    padding: 10px 18px;
+  }
+  .channel-buttons .button-style span {
+    font-size: 1em;
+  }
+  #music-icon-container {
+    width: 45px;
+    height: 45px;
+    bottom: 10px;
+  }
+  #music-icon {
+    width: 22px;
+    height: 22px;
+  }
+  #linear-audio-visualizer {
+    height: 70px;
+  }
+}

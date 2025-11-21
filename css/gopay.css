@@ -1,0 +1,313 @@
+/* css/gopay.css */
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* Background GIF as requested */
+    background: url('https://imagedelivery.net/c2SKP8Bk0ZKw6UDgeeIlbw/9ef5b2ed-3acd-4582-c598-e94838394700/public') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center;   /* Center content vertically */
+    height: 100vh;         /* Ensure body takes full viewport height */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;      /* Prevent unwanted scrolling */
+    position: relative;
+    color: #e0e7ff; /* Light text color */
+}
+
+/* Basic glow effect for the main container */
+.solo-leveling-container-glow {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.7), /* Green glow */
+                0 0 40px rgba(0, 255, 0, 0.4),
+                0 0 60px rgba(0, 255, 0, 0.2);
+    border: 2px solid #00c800; /* Bright green border */
+}
+
+/* Text glow for titles and important elements */
+.solo-leveling-text-glow {
+    text-shadow: 0 0 10px rgba(125, 211, 252, 0.8), /* Sky-300 */
+                 0 0 20px rgba(59, 130, 246, 0.6); /* Blue-500 */
+}
+
+/* System UI grid lines - GREEN themed */
+.system-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        repeating-linear-gradient(
+            0deg, transparent, transparent 1px,
+            rgba(0, 200, 0, 0.05) 1px, rgba(0, 200, 0, 0.05) 3px /* Green grid lines */
+        ),
+        repeating-linear-gradient(
+            90deg, transparent, transparent 1px,
+            rgba(0, 200, 0, 0.05) 1px, rgba(0, 200, 0, 0.05) 3px /* Green grid lines */
+        );
+    background-size: 20px 20px;
+    animation: moveSystemGrid 80s linear infinite;
+    opacity: 0.1;
+}
+@keyframes moveSystemGrid {
+    from { background-position: 0 0; } to { background-position: 100% 100%; }
+}
+
+/* Aura background effect - GREEN themed */
+.aura-background {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 200vw; height: 200vh;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 255, 0, 0.15) 0%, /* Bright green glow */
+        rgba(0, 200, 0, 0.1) 25%,
+        rgba(0, 150, 0, 0.05) 50%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: -2;
+    animation: pulseAura 15s ease-in-out infinite alternate, rotateAura 60s linear infinite;
+    filter: blur(80px);
+}
+@keyframes pulseAura {
+    0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.9); }
+    50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.9); }
+}
+@keyframes rotateAura {
+    from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Main container base style */
+.main-container {
+    background-color: rgba(17, 24, 39, 0.7); /* Dark semi-transparent background */
+    backdrop-filter: blur(8px);
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1.5rem; /* Sufficient padding */
+    max-width: 700px; /* Increased max-width */
+    width: 90%; /* Take 90% of screen width, for responsiveness */
+    margin-left: auto; /* Helps ensure horizontal center position */
+    margin-right: auto; /* Helps ensure horizontal center position */
+    box-sizing: border-box; /* Important for width calculation with padding */
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Title (GoPay Payment, System Activated) */
+.system-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.8rem); /* Responsive font size */
+    line-height: 1.1;
+    color: #afff87; /* Bright green text */
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 200, 0, 0.6);
+    margin-bottom: 0.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.system-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem); /* Responsive font size */
+    color: #87e85c; /* Slightly darker green */
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+/* Description text below the title */
+.description-text {
+    font-size: clamp(0.7rem, 2vw, 0.9rem); /* Responsive font size */
+    line-height: 1.3;
+    color: #c9fcc9; /* Lighter green-white text */
+    margin-bottom: 0.5rem;
+    font-family: 'Inter', sans-serif;
+}
+.warning-text {
+    font-size: clamp(0.6rem, 1.8vw, 0.8rem); /* Responsive font size */
+    color: #ffcccc; /* Red warning text */
+    font-family: 'Press Start 2P', cursive;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+/* QRIS Image Container - green border/glow */
+.qris-code-container {
+    background-color: #1f2937; /* Dark gray background */
+    padding: 0.5rem; /* Larger padding */
+    border-radius: 0.5rem;
+    display: inline-flex; /* Use flex for image centering */
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
+    margin-top: 1rem; /* Larger margin */
+    margin-bottom: 0.75rem; /* Larger margin */
+    border: 2px solid #00e600; /* Bright green border */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Green glow */
+    width: clamp(180px, 40vw, 250px); /* Responsive QRIS width */
+    height: clamp(180px, 40vw, 250px); /* Responsive QRIS height */
+    overflow: hidden; /* Ensure nothing overflows */
+}
+.qris-img {
+    width: 100%; /* Image fills container width */
+    height: 100%; /* Image fills container height */
+    object-fit: contain; /* Important: Ensure image fits without cropping or stretching */
+    border-radius: 0.5rem;
+    border: 1px solid #00b300; /* Darker green border */
+}
+
+/* Important Note box */
+.important-note {
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: #ffcccc;
+    padding: 1rem 1.25rem; /* Larger padding */
+    border-radius: 0.5rem;
+    margin-top: 1rem; /* Larger margin */
+    font-size: clamp(0.7rem, 2vw, 0.9rem); /* Responsive font size */
+    font-weight: 600;
+    text-align: center;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    font-family: 'Press Start 2P', cursive;
+    line-height: 1.2;
+}
+
+/* Download Button */
+.download-button {
+    padding: 0.75rem 2rem; /* Larger padding */
+    background: linear-gradient(145deg, #00C853, #00A956); /* GoPay green gradient */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 200, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #00e600; /* Bright green border */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem; /* Larger margin */
+    font-size: clamp(0.8rem, 2.5vw, 1rem); /* Responsive font size */
+    font-family: 'Press Start 2P', cursive;
+    letter-spacing: 0.5px;
+}
+.download-button::before {
+    content: ''; position: absolute; top: 0; left: -150%;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-25deg); transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.download-button:hover::before { transform: translateX(100%) skewX(-25deg); }
+.download-button:hover { transform: translateY(-1px) scale(1.01); box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 255, 0, 0.7); }
+.download-button:active { transform: translateY(0) scale(0.99); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 7px rgba(0, 200, 0, 0.4); }
+
+/* Back button styles - Re-added */
+.back-button {
+    position: fixed; top: 1rem; right: 1rem; z-index: 99999;
+    padding: 0.5rem; width: 3.5rem; height: 3.5rem; /* Increased size */
+    background-color: rgba(255, 255, 255, 0.08); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 50%;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease; display: flex; justify-content: center; align-items: center;
+    color: #a7f3d0; /* Green tint for icon */
+}
+.back-button svg { fill: currentColor; width: 1.5rem; height: 1.5rem; transform: scaleX(-1); transition: all 0.3s ease; } /* Increased SVG size */
+.back-button:hover { transform: scale(1.1) translateY(-1px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 255, 0, 0.8); }
+.back-button:hover svg { fill: #ffffff; filter: drop-shadow(0 0 5px rgba(0, 255, 0, 1)); transform: scale(1.1) scaleX(-1); }
+.back-button:active { transform: translateY(0) scale(0.98); box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); }
+
+/* Styles for Music Player from index.html */
+#music-icon-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+#music-icon-container:hover {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 191, 255, 0.8);
+}
+
+#music-icon {
+    width: 30px;
+    height: 30px;
+    fill: #ffffff;
+    transition: transform 0.1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+#circular-audio-visualizer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#linear-audio-visualizer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100px;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* Responsive adjustments for music player */
+@media (max-width: 768px) {
+    #music-icon-container {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+    }
+    #music-icon {
+        width: 25px;
+        height: 25px;
+    }
+    #linear-audio-visualizer {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    #music-icon-container {
+        width: 45px;
+        height: 45px;
+        bottom: 10px;
+    }
+    #music-icon {
+        width: 22px;
+        height: 22px;
+    }
+    #linear-audio-visualizer {
+        height: 70px;
+    }
+}

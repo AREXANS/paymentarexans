@@ -1,0 +1,406 @@
+/* css/qris.css */
+
+/* Import Google Font - 'Inter' for overall readability, 'Press Start 2P' for game-like elements */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Press+Start+2P&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif; /* Default font */
+    /* Change background to GIF */
+    background: url('https://imagedelivery.net/c2SKP8Bk0ZKw6UDgeeIlbw/9ef5b2ed-3acd-4582-c598-e94838394700/public') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 5px; /* Minimal padding for body to allow container to fill space */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent body scroll */
+    color: #e0e7ff; /* Light blue-ish text color */
+}
+
+/* Base glow effect for main containers */
+.solo-leveling-container-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.7), /* blue-500 */
+                0 0 40px rgba(59, 130, 246, 0.4),
+                0 0 60px rgba(59, 130, 246, 0.2);
+    border: 2px solid #3b82f6; /* blue-500 border */
+}
+
+/* Text glow for titles and important elements */
+.solo-leveling-text-glow {
+    text-shadow: 0 0 10px rgba(125, 211, 252, 0.8), /* sky-300 */
+                 0 0 20px rgba(59, 130, 246, 0.6); /* blue-500 */
+}
+
+/* System UI grid lines - animated */
+.system-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 1px,
+            rgba(37, 99, 235, 0.06) 1px,
+            rgba(37, 99, 235, 0.06) 3px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 1px,
+            rgba(37, 99, 235, 0.06) 1px,
+            rgba(37, 99, 235, 0.06) 3px
+        );
+    background-size: 20px 20px; /* Slightly smaller grid */
+    animation: moveSystemGrid 80s linear infinite;
+    opacity: 0.15; /* Reduced opacity */
+}
+
+@keyframes moveSystemGrid {
+    from { background-position: 0 0; }
+    to { background-position: 100% 100%; }
+}
+
+/* "SCAN!" Button styling */
+.scan-button {
+    background: linear-gradient(145deg, #3B82F6, #2563EB); /* Blue gradient */
+    color: white;
+    padding: 0.5rem 1.6rem; /* Fine-tuned padding */
+    border-radius: 9999px; /* Fully rounded */
+    font-weight: bold;
+    font-size: 0.8rem; /* Fine-tuned font size */
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.4); /* Blue shadow */
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #60A5FA; /* Light blue border */
+    font-family: 'Press Start 2P', cursive; /* Game font */
+    letter-spacing: 0.5px; /* Further reduced letter spacing */
+    margin-top: 0.6rem; /* Space above button, adjusted */
+}
+
+.scan-button:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 5px 12px rgba(59, 130, 246, 0.6);
+    background: linear-gradient(145deg, #60A5FA, #3B82F6);
+}
+
+.scan-button:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow: 0 1px 3px rgba(59, 130, 246, 0.3);
+}
+
+.scan-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Slightly less intense shine */
+    transform: skewX(-25deg);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scan-button:hover::before {
+    left: 150%;
+}
+
+/* System message box (like quest log) */
+.system-message-box {
+    background-color: #111827; /* Dark gray background for solid look */
+    border: 1px solid #3b82f6; /* Blue border */
+    border-radius: 0.5rem;
+    padding: 0.6rem; /* Fine-tuned padding */
+    font-size: 0.55rem; /* Fine-tuned font size */
+    text-align: left;
+    margin-top: 0.2rem; /* Adjusted space from Sung Jin-woo image - REDUCED */
+    box-shadow: 0 0 7px rgba(59, 130, 246, 0.4); /* Adjusted shadow */
+    font-family: 'Press Start 2P', cursive; /* Game font for messages */
+    color: #93c5fd; /* blue-300 */
+    width: 100%; /* Ensure it takes full width of its parent */
+    line-height: 1.2; /* Tighter line height for readability in small space */
+}
+
+.system-message-box span {
+    color: #ef4444; /* red-500 for important parts */
+}
+
+/* QR Code container background */
+.qris-code-container {
+    background-color: #1f2937; /* Dark gray background */
+    padding: 0.3rem; /* Very small padding */
+    border-radius: 0.5rem; /* rounded-lg */
+    display: inline-block; /* to wrap content tightly */
+    margin-bottom: 0.4rem; /* Reduced margin-bottom */
+    border: 2px solid #3B82F6; /* Blue border */
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); /* Blue glow */
+}
+
+/* Character box styling */
+.character-box {
+    background-color: #1f2937; /* Same as QR container background */
+    border: 2px solid #60a5fa; /* Blue border (matches Sung Jin-woo's image border) */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5); /* Blue glow */
+    overflow: hidden;
+    width: 100%; /* Take full width of its parent column */
+    padding: 0.25rem; /* Very small padding around image */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.character-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.2rem; /* Slightly smaller border-radius for image inside box */
+    object-fit: cover;
+    aspect-ratio: 3 / 4; /* To mimic portrait aspect ratio */
+}
+.character-box p {
+    font-size: 0.55rem; /* Smaller font for character name */
+    letter-spacing: 0.5px;
+    margin-top: 0.3rem; /* Adjusted margin */
+}
+
+/* Main layout structure: two columns side-by-side on mobile */
+.main-panel-content {
+    display: flex;
+    flex-direction: row; /* Default to row for mobile as per screenshot */
+    gap: 0.75rem; /* Slightly reduced space between the two main columns */
+    width: 100%;
+    margin-bottom: 0.6rem; /* Space between top content and instructions/button */
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48%; /* Roughly half width for left column */
+    flex-shrink: 0; /* Prevent shrinking */
+    gap: 0.2rem; /* Reduced gap between elements in the left column */
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Default text center */
+    width: 52%; /* Remaining width for right column */
+    flex-grow: 1; /* Allow it to grow */
+    /* Adjusted margin-top to subtly push down the right column content to align with character box */
+    margin-top: 0.1rem; /* Very subtle adjustment, ensures text QR alignment */
+}
+
+/* Responsive text sizes to match screenshot */
+.title-h1 {
+    font-size: 1.7rem; /* Fine-tuned for "QRIS" */
+    line-height: 1; /* Tighter line height for title */
+    margin-bottom: 0.15rem; /* Slightly increased margin to separate from subtitle */
+}
+.subtitle-span {
+    font-size: 0.9rem; /* Fine-tuned for "SYSTEM ACTIVATED" */
+    margin-top: 0; /* No margin-top */
+    margin-bottom: 0.5rem; /* Added margin-bottom to create space from the quote */
+}
+/* Enhanced styling for the main quote */
+.system-quote {
+    font-family: 'Press Start 2P', cursive; /* Use game font for impact */
+    font-size: 0.75rem; /* Slightly larger for emphasis */
+    line-height: 1.3;
+    color: #d1e9ff; /* Brighter blue-ish white */
+    text-shadow: 0 0 5px rgba(125, 211, 252, 0.7), /* Subtle blue glow */
+                 0 0 10px rgba(59, 130, 246, 0.4);
+    margin-top: 0.4rem; /* Added margin-top to separate from subtitle */
+    margin-bottom: 0.8rem; /* Increased margin-bottom to create space from QR */
+    font-weight: bold; /* Make it bold */
+}
+.warning-span {
+    font-size: 0.55rem; /* Even smaller for warning */
+    margin-top: 0.2rem; /* Added margin-top to separate from instructions */
+    display: block; /* Ensure it takes its own line */
+}
+.instruction-p {
+    font-size: 0.6rem; /* Fine-tuned font for instructions */
+    line-height: 1.2; /* Tighter line height */
+    margin-top: 0.4rem; /* Adjusted margin-top for instructions below QR */
+    margin-bottom: 0.1rem; /* Reduced margin-bottom to make warning closer */
+}
+.code-sm {
+     font-size: 0.5rem; /* Smaller code text */
+     padding: 0 2px; /* Smaller padding */
+}
+
+/* Overall container padding and width */
+.main-container {
+    padding: 0.6rem; /* Significantly reduced overall padding */
+    max-width: 350px; /* Further fine-tuned max-width for exact match */
+    width: 95%; /* Responsive width */
+}
+
+/* QR Image size */
+.qris-img {
+    width: 120px; /* Fine-tuned size for QR image */
+    height: 120px;
+}
+
+/* New unique back button */
+.back-button {
+    position: fixed; /* Changed to fixed to position relative to viewport */
+    top: 1rem; /* Adjusted position */
+    right: 1rem; /* Adjusted position */
+    z-index: 99999;
+    padding: 0;
+    width: 3rem; /* Same size as other back buttons */
+    height: 3rem;
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #e0f7fa;
+}
+
+.back-button svg {
+    fill: currentColor;
+    width: 1.25rem; /* Same size as other back buttons */
+    height: 1.25rem;
+    transform: scaleX(-1);
+    transition: fill 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.1) translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(0, 191, 255, 0.8);
+}
+.back-button:hover svg {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 5px rgba(0, 191, 255, 1));
+    transform: scale(1.1) scaleX(-1);
+}
+
+.back-button:active {
+    transform: scale(1) translateY(0);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Important Note Style (now as plain text and in left column) */
+.important-note {
+    font-family: 'Inter', sans-serif; /* Using Inter or default font */
+    font-size: 0.6rem; /* Slightly increased text size */
+    color: #ef4444; /* Red text color */
+    /* Removed all styling that made it look like a box */
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    text-shadow: none;
+    /* Positioning and layout adjustments */
+    margin-top: 0.2rem; /* Space from element above */
+    text-align: center; /* Centered in its own column */
+    line-height: 1.3;
+    width: 100%; /* Take full width of its parent */
+    box-sizing: border-box;
+}
+
+/* Styles for Music Player from index.html */
+#music-icon-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+#music-icon-container:hover {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 191, 255, 0.8);
+}
+
+#music-icon {
+    width: 30px;
+    height: 30px;
+    fill: #ffffff;
+    transition: transform 0.1s ease-out;
+    position: relative;
+    z-index: 1;
+}
+
+#circular-audio-visualizer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+#linear-audio-visualizer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100px;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* Responsive adjustments for music player */
+@media (max-width: 768px) {
+    #music-icon-container {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+    }
+    #music-icon {
+        width: 25px;
+        height: 25px;
+    }
+    #linear-audio-visualizer {
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    #music-icon-container {
+        width: 45px;
+        height: 45px;
+        bottom: 10px;
+    }
+    #music-icon {
+        width: 22px;
+        height: 22px;
+    }
+    #linear-audio-visualizer {
+        height: 70px;
+    }
+}
